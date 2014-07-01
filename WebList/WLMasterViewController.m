@@ -10,6 +10,8 @@
 
 #import "WLDetailViewController.h"
 
+#import "WebsiteController.h"
+
 @interface WLMasterViewController () {
     NSMutableArray *_objects;
 }
@@ -26,10 +28,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    // self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    _objects = [WebsiteController websites].mutableCopy;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,8 +66,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    cell.textLabel.text = _objects[indexPath.row];
+
     return cell;
 }
 
@@ -105,8 +107,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        [[segue destinationViewController] setDetailItem:_objects[indexPath.row]];
     }
 }
 

@@ -22,6 +22,7 @@
 		71A5A85E19632D3D00B40A5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A5A83D19632D3D00B40A5C /* UIKit.framework */; };
 		71A5A86619632D3D00B40A5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71A5A86419632D3D00B40A5C /* InfoPlist.strings */; };
 		71A5A86819632D3D00B40A5C /* WebListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5A86719632D3D00B40A5C /* WebListTests.m */; };
+		71A5A87319632D6D00B40A5C /* WebsiteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5A87219632D6D00B40A5C /* WebsiteController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		71A5A86319632D3D00B40A5C /* WebListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WebListTests-Info.plist"; sourceTree = "<group>"; };
 		71A5A86519632D3D00B40A5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		71A5A86719632D3D00B40A5C /* WebListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebListTests.m; sourceTree = "<group>"; };
+		71A5A87119632D6D00B40A5C /* WebsiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebsiteController.h; sourceTree = "<group>"; };
+		71A5A87219632D6D00B40A5C /* WebsiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebsiteController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				71A5A84F19632D3D00B40A5C /* WLMasterViewController.m */,
 				71A5A85119632D3D00B40A5C /* WLDetailViewController.h */,
 				71A5A85219632D3D00B40A5C /* WLDetailViewController.m */,
+				71A5A87119632D6D00B40A5C /* WebsiteController.h */,
+				71A5A87219632D6D00B40A5C /* WebsiteController.m */,
 				71A5A85419632D3D00B40A5C /* Images.xcassets */,
 				71A5A84019632D3D00B40A5C /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71A5A85319632D3D00B40A5C /* WLDetailViewController.m in Sources */,
+				71A5A87319632D6D00B40A5C /* WebsiteController.m in Sources */,
 				71A5A84619632D3D00B40A5C /* main.m in Sources */,
 				71A5A85019632D3D00B40A5C /* WLMasterViewController.m in Sources */,
 				71A5A84A19632D3D00B40A5C /* WLAppDelegate.m in Sources */,
