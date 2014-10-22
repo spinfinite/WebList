@@ -10,6 +10,7 @@
 
 @interface WLDetailViewController ()
 - (void)configureView;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 @end
 
 @implementation WLDetailViewController

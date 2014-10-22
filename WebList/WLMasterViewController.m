@@ -12,9 +12,12 @@
 
 #import "WebsiteController.h"
 
-@interface WLMasterViewController () {
+@interface WLMasterViewController () <UISearchBarDelegate>{
     NSMutableArray *_objects;
+    NSArray *_filteredObjects;
 }
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) UISearchDisplayController *searchController;
 @end
 
 @implementation WLMasterViewController
@@ -31,6 +34,13 @@
     // self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     _objects = [WebsiteController websites].mutableCopy;
+    
+    self.searchBar.delegate = self;
+    
+    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    self.searchController.searchResultsDataSource = self;
+    self.searchController.searchResultsDelegate = self;
+    [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
 }
 
@@ -50,6 +60,17 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchText.length == 0){
+        _filteredObjects = nil;
+    }
+    else{
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@", searchText];
+        _filteredObjects = [_objects filteredArrayUsingPredicate:pred];
+    }
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -59,12 +80,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    if([tableView isEqual:self.tableView]){
+        return _objects.count;
+    }
+    
+    return _filteredObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    if([tableView isEqual:self.tableView]){
+        cell.textLabel.text = _objects[indexPath.row];
+    }
+    else{
+        cell.textLabel.text = _filteredObjects[indexPath.row];
+    }
 
     cell.textLabel.text = _objects[indexPath.row];
 
