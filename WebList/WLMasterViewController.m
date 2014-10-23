@@ -12,12 +12,15 @@
 
 #import "WebsiteController.h"
 
+#import <iAd/iAd.h>
+
 @interface WLMasterViewController () <UISearchBarDelegate>{
     NSMutableArray *_objects;
     NSArray *_filteredObjects;
 }
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
+@property (nonatomic, strong) NSString *selectedURL;
 @end
 
 @implementation WLMasterViewController
@@ -42,12 +45,25 @@
     self.searchController.searchResultsDelegate = self;
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
+    self.canDisplayBannerAds = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if(searchText.length == 0){
+        _filteredObjects = nil;
+    }else{
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@", searchText];
+        _filteredObjects = [_objects filteredArrayUsingPredicate:pred];
+    }
+    [self.tableView reloadData];
+    
 }
 
 - (void)insertNewObject:(id)sender
@@ -58,17 +74,6 @@
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    if(searchText.length == 0){
-        _filteredObjects = nil;
-    }
-    else{
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"self CONTAINS[cd] %@", searchText];
-        _filteredObjects = [_objects filteredArrayUsingPredicate:pred];
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark - Table View
@@ -83,15 +88,17 @@
     if([tableView isEqual:self.tableView]){
         return _objects.count;
     }
+    else{
     
     return _filteredObjects.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    if([tableView isEqual:self.tableView]){
+    if([self.tableView isEqual:self.tableView]){
         cell.textLabel.text = _objects[indexPath.row];
     }
     else{
@@ -119,6 +126,17 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.tableView){
+        self.selectedURL = _objects[indexPath.row];
+    }
+    else{
+        self.selectedURL = _filteredObjects[indexPath.row];
+    }
+    [self performSegueWithIdentifier:@"detailSegue" sender:self];
+    
+}
+
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
@@ -137,9 +155,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [[segue destinationViewController] setDetailItem:_objects[indexPath.row]];
+    if ([[segue identifier] isEqualToString:@"detailSegue"]) {
+        [[segue destinationViewController] setDetailItem: self.selectedURL];
     }
 }
 

@@ -23,6 +23,7 @@
 		71A5A86619632D3D00B40A5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71A5A86419632D3D00B40A5C /* InfoPlist.strings */; };
 		71A5A86819632D3D00B40A5C /* WebListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5A86719632D3D00B40A5C /* WebListTests.m */; };
 		71A5A87319632D6D00B40A5C /* WebsiteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A5A87219632D6D00B40A5C /* WebsiteController.m */; };
+		E36B6B1319F8783D00FD1750 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E36B6B1219F8783D00FD1750 /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		71A5A86719632D3D00B40A5C /* WebListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebListTests.m; sourceTree = "<group>"; };
 		71A5A87119632D6D00B40A5C /* WebsiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebsiteController.h; sourceTree = "<group>"; };
 		71A5A87219632D6D00B40A5C /* WebsiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebsiteController.m; sourceTree = "<group>"; };
+		E36B6B1219F8783D00FD1750 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E36B6B1319F8783D00FD1750 /* iAd.framework in Frameworks */,
 				71A5A83C19632D3D00B40A5C /* CoreGraphics.framework in Frameworks */,
 				71A5A83E19632D3D00B40A5C /* UIKit.framework in Frameworks */,
 				71A5A83A19632D3D00B40A5C /* Foundation.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		71A5A83819632D3D00B40A5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E36B6B1219F8783D00FD1750 /* iAd.framework */,
 				71A5A83919632D3D00B40A5C /* Foundation.framework */,
 				71A5A83B19632D3D00B40A5C /* CoreGraphics.framework */,
 				71A5A83D19632D3D00B40A5C /* UIKit.framework */,
@@ -469,6 +473,7 @@
 				71A5A86D19632D3D00B40A5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71A5A86E19632D3D00B40A5C /* Build configuration list for PBXNativeTarget "WebListTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +482,7 @@
 				71A5A87019632D3D00B40A5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
